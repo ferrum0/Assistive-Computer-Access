@@ -1,0 +1,13 @@
+# Pinned to a combination verified to work together on macOS (Apple Silicon):
+# - mediapipe>=1.0 has a regression where its Tasks-API face/hand landmarker
+#   graphs crash the process ("Check failed: service_ Service is unavailable",
+#   inside DrishtiMetalHelper) outside a fully interactive GUI session, even
+#   with the CPU delegate forced. 0.10.21 does not have this problem.
+# - mediapipe declares opencv-contrib-python as a dependency; installing
+#   opencv-python alongside it corrupts the shared `cv2` package directory
+#   (both wheels install into site-packages/cv2). Depend on
+#   opencv-contrib-python only -- it is a superset of opencv-python.
+# - mediapipe 0.10.21 requires numpy<2.
+mediapipe==0.10.21
+opencv-contrib-python>=4.9,<5.1
+numpy>=1.26,<2
